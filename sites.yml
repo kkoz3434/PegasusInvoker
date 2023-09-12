@@ -1,0 +1,31 @@
+x-pegasus:
+  apiLang: python
+  createdBy: kkoz34
+  createdOn: 09-04-23T15:00:39Z
+pegasus: 5.0.4
+sites:
+- name: local
+  directories:
+  - type: sharedScratch
+    path: /home/kkoz34/PycharmProjects/PegasusInvoker/test_workflow/scratch
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///home/kkoz34/PycharmProjects/PegasusInvoker/test_workflow/scratch
+      operation: all
+  - type: localStorage
+    path: /home/kkoz34/PycharmProjects/PegasusInvoker/test_workflow/output
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///home/kkoz34/PycharmProjects/PegasusInvoker/test_workflow/output
+      operation: all
+- name: condorpool
+  directories: []
+  profiles:
+    condor:
+      universe: vanilla
+      periodic_remove: (JobStatus == 5) && ((CurrentTime - EnteredCurrentStatus) >
+        10)
+    pegasus:
+      style: condor
+      data.configuration: condorio
+      clusters.num: 2
